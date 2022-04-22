@@ -39,8 +39,8 @@ public class GUI implements ActionListener {
 		titles.add(new JLabel("Wednesday"));
 		titles.add(new JLabel("Thursday"));
 		titles.add(new JLabel("Friday"));
-		for (int i=0; i<12; i++) {
-			times.add(new JLabel((i+8) +":00"));
+		for (int i=0; i<14; i++) {
+			times.add(new JLabel((i+7) +":00"));
 		}
 		
 		panel = new JPanel();
@@ -50,16 +50,24 @@ public class GUI implements ActionListener {
 		
 		for(int i=0; i<6; i++) {
 			constraints.fill = GridBagConstraints.HORIZONTAL;
-			constraints.gridx = 0;
-			constraints.gridy = i;
+			constraints.gridx = i;
+			constraints.gridy = 0;
 			panel.add(titles.get(i), constraints);
 		}
-		for(int i=0; i<6; i++) {
-			panel.add(times.get(i));
-			for(int j=0; j<12; j++) {
-				panel.add(buttonlist.get(i*j+j));
-				System.out.println(i+j);
-				}
+		for(int i=1; i<14; i++) {
+			constraints.fill = GridBagConstraints.HORIZONTAL;
+			constraints.gridx = 0;
+			constraints.gridy = i;
+			panel.add(times.get(i), constraints);
+		}
+		for(int i=1; i<6; i++) {
+			for(int j=1; j<14; j++) {
+				constraints.fill = GridBagConstraints.HORIZONTAL;
+				constraints.gridx = i;
+				constraints.gridy = j;
+				System.out.println((j-1)*5+(i-1)+ "  x = " + i + "  y = "+ j);
+				panel.add(buttonlist.get((j-1)*5+(i-1)), constraints);
+			}
 		}
 		frame.add(panel, BorderLayout.CENTER);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
