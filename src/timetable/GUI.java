@@ -155,7 +155,7 @@ public class GUI implements ActionListener {
 		boolean[] returnlist = new boolean[66];
 		for (int i = 1; i < timetable.size(); i++) {
 			for (int j = 0; j < 66; j++) {
-				returnlist[j] = timetable.get(i)[j] && timetable.get(i - 1)[j];
+				returnlist[j] = timetable.get(i)[j] || timetable.get(i - 1)[j];
 			}
 		}
 		return returnlist;
