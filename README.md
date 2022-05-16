@@ -17,6 +17,6 @@ Gury
 
 
 Future updates I would like to add:
-Some way of storing and retriving timetables
-Placing it online for easier use
-Update the GUI to look more modern
+Some way of storing and retriving timetables. 
+Placing it online for easier use. 
+Update the GUI to look more modern. 
