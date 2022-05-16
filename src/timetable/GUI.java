@@ -27,6 +27,7 @@ public class GUI implements ActionListener {
 	private JPanel panel;
 	private JButton nextButton;
 	private JButton compareButton;
+	private JButton clearButton;
 
 	// backend specific
 	private boolean[] output = new boolean[66];
@@ -81,10 +82,15 @@ public class GUI implements ActionListener {
 		compareButton.setText("Compare");
 		compareButton.addActionListener(this);
 
+		// creating "clear" button
+		clearButton = new JButton();
+		clearButton.setText("Clear");
+		clearButton.addActionListener(this);
+
 		// create a new panel for GUI
 		panel = new JPanel();
 		panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
-		panel.setBackground(Color.PINK);
+		panel.setBackground(Color.LIGHT_GRAY);
 
 		// creating layout
 		panel.setLayout(new GridBagLayout());
@@ -111,6 +117,13 @@ public class GUI implements ActionListener {
 		constraints.gridx = 6;
 		constraints.gridy = 15;
 		panel.add(compareButton);
+
+		// adding clear button
+		constraints.ipady = 25;
+		constraints.ipadx = 100;
+		constraints.gridx = 7;
+		constraints.gridy = 15;
+		panel.add(clearButton);
 
 		// adding days of the week
 		for (int i = 0; i < 6; i++) {
@@ -155,7 +168,7 @@ public class GUI implements ActionListener {
 		boolean[] returnlist = new boolean[66];
 		for (int i = 1; i < timetable.size(); i++) {
 			for (int j = 0; j < 66; j++) {
-				returnlist[j] = timetable.get(i)[j] && timetable.get(i - 1)[j];
+				returnlist[j] = timetable.get(i)[j] || timetable.get(i - 1)[j];
 			}
 		}
 		return returnlist;
@@ -189,13 +202,23 @@ public class GUI implements ActionListener {
 			}
 		}
 
+		// compare button pushed
+		if (e.getSource() == clearButton) {
+			// clearing timetable and reseting GUI
+			timetable.clear();
+			for (int i = 0; i < 66; i++) {
+					buttonState[i] = false;
+					buttonlist.get(i).setBackground(Color.WHITE);
+			}
+		}
+
 		// check if any timetable time slot button pushed
 		for (int i = 0; i < 66; i++) {
 			if (e.getSource() == buttonlist.get(i)) {
 				// check it's state and update array and colour
 				if (buttonState[i] == false) {
 					buttonState[i] = true;
-					buttonlist.get(i).setBackground(Color.BLACK);
+					buttonlist.get(i).setBackground(Color.CYAN);
 				} else if (buttonState[i] == true) {
 					buttonState[i] = false;
 					buttonlist.get(i).setBackground(Color.WHITE);
